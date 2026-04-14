@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workshop-app
+  labels:
+    app: workshop-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workshop-app
+  template:
+    metadata:
+      labels:
+        app: workshop-app
+    spec:
+      containers:
+      - name: workshop-app
+        # We'll update this image during the CI/CD demo
+        image: ghcr.io/firojpaudel/docker-k8s-ci-cd-demo:latest
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
